@@ -16,7 +16,10 @@ class App extends Component {
       secondMovieID: "",
       firstMovieCrew: [],
       secondMovieCrew: [],
+      firstMoviePoster: "",
+      secondMoviePoster: "",
     };
+    this.scrollToResults = React.createRef();
   }
 
   handleFirstMovie = (e) => {
@@ -34,6 +37,11 @@ class App extends Component {
     if (this.state.secondMovie !== "") {
       this.secondMovieRequest();
     }
+
+    this.myDivToFocus.current.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+    });
   };
 
   firstMovieRequest = async () => {
@@ -48,10 +56,12 @@ class App extends Component {
       {
         firstMovieData: movieData,
         firstMovieID: movieData.results[0].id,
+        firstMoviePoster: movieData.results[0].poster_path,
       },
       () => {
         console.log(this.state.firstMovieData);
         console.log(this.state.firstMovieID);
+        console.log(this.state.firstMoviePoster);
       }
     );
     this.firstMovieCreditsRequest();
@@ -63,10 +73,10 @@ class App extends Component {
     ).then((response) => response.json());
     this.setState(
       {
-        firstMovieCrew: movieCredits,
+        firstMovieCrew: movieCredits.crew,
       },
       () => {
-        console.log(this.state.firstMovieCrew.crew);
+        console.log(this.state.firstMovieCrew);
       }
     );
   };
@@ -83,10 +93,12 @@ class App extends Component {
       {
         secondMovieData: movieData,
         secondMovieID: movieData.results[0].id,
+        secondMoviePoster: movieData.results[0].poster_path,
       },
       () => {
         console.log(this.state.secondMovieData);
         console.log(this.state.secondMovieID);
+        console.log(this.state.secondMoviePoster);
       }
     );
     this.secondMovieCreditsRequest();
@@ -108,7 +120,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App container flex flex-col mx-auto bg-gray-800 text-center text-gray-100 h-screen items-center overflow-none">
+      <div className="App container relative flex flex-col mx-auto bg-gray-800 text-center text-gray-100 h-200 items-center overflow-hidden w-screen">
         <div className="h-24 w-24 rounded-full absolute -right-10 -top-10 bg-gray-700"></div>
         <div className="h-44 w-44 rounded-full absolute -left-20 -top-20 bg-gray-700"></div>
         <div className="Apptitle my-8 text-lg font-medium tracking-widest text-pink-200">
@@ -157,10 +169,49 @@ class App extends Component {
             </div>
           </div>
         </div>
-        <div className="text-white">
-          {this.state.firstMovie} and {this.state.secondMovie}
+        <div
+          className="ResultScreen bg-gray-200 Searchbox container flex flex-col text-gray-800 w-11/12 mx-auto my-12 rounded-2xl"
+          ref={this.scrollToResults}
+        >
+          <div className="grid grid-cols-3">
+            <div className="grid grid-rows-5">
+              <div className="specialbox h-12"></div>
+              <div className="flex justify-center h-18 items-center bg-gray-700 text-gray-200  font-medium tracking-wide leading-relaxed">
+                {this.state.firstMovie}
+              </div>
+              <div className="flex justify-center h-17 items-center bg-gray-700 text-gray-200 font-medium tracking-wide leading-relaxed">
+                {this.state.secondMovie}
+              </div>
+              <div className="flex justify-center items-center bg-gray-700 text-gray-200 text-lg font-medium tracking-wide leading-relaxed shadow-none">
+                CREW
+              </div>
+            </div>
+            <div className="">
+              <div className=" overflow-hidden ">
+                <img
+                  src={
+                    "https://image.tmdb.org/t/p/w200" +
+                    this.state.firstMoviePoster
+                  }
+                  alt={"Poster of " + this.state.firstMovie}
+                ></img>
+                <div>4</div>
+              </div>
+            </div>
+            <div>
+              <div className="rounded-tr-2xl overflow-hidden">
+                <img
+                  src={
+                    "https://image.tmdb.org/t/p/w200" +
+                    this.state.secondMoviePoster
+                  }
+                  alt={"Poster of " + this.state.secondMovie}
+                ></img>
+              </div>
+              <div>5</div>
+            </div>
+          </div>
         </div>
-        <div className="text-gray-200"></div>
       </div>
     );
   }
