@@ -30,81 +30,85 @@ class App extends Component {
   handleSubmission = (e) => {
     e.preventDefault();
     console.log("Submit was clicked");
-    this.firstMovieRequest();
-    if (this.state.secondMovie !== "") {
-      this.secondMovieRequest();
-    }
-  };
-
-  firstMovieRequest = async () => {
-    const movieData = await fetch(
+    fetch(
       "https://api.themoviedb.org/3/search/movie?api_key=" +
         API_KEY +
         "&language=en-US&query=" +
         this.state.firstMovie +
         "&page=1&include_adult=yes"
-    ).then((response) => response.json());
-    this.setState(
-      {
-        firstMovieData: movieData,
-        firstMovieID: movieData.results[0].id,
-      },
-      () => {
-        console.log(this.state.firstMovieData);
-        console.log(this.state.firstMovieID);
-      }
-    );
-    this.firstMovieCreditsRequest();
+    )
+      .then((res) => res.json())
+      .then((jsonData) => {
+        this.setState(
+          {
+            firstMovieData: jsonData,
+            firstMovieID: jsonData.results[0].id,
+          },
+          () => {
+            console.log(this.state.firstMovieData);
+            console.log(this.state.firstMovieID);
+          }
+        );
+      })
+      .then
+      // fetch(
+      //   `https://api.themoviedb.org/3/movie/${this.state.firstMovieID}/credits?api_key=${API_KEY}&language=en-US`
+      // )
+      //   .then((res) => res.json())
+      //   .then((jsonData) => {
+      //     this.setState(
+      //       {
+      //         firstMovieCrew: jsonData,
+      //       },
+      //       () => {
+      //         console.log(this.state.firstMovieCrew);
+      //       }
+      //     );
+      //   })
+      ();
+    if (this.state.secondMovie !== "") {
+      fetch(
+        "https://api.themoviedb.org/3/search/movie?api_key=" +
+          API_KEY +
+          "&language=en-US&query=" +
+          this.state.secondMovie +
+          "&page=1&include_adult=yes"
+      )
+        .then((res) => res.json())
+        .then((jsonData) => {
+          this.setState(
+            {
+              secondMovieData: jsonData,
+              secondMovieID: jsonData.results[0].id,
+            },
+            () => {
+              console.log(this.state.secondMovieData);
+              console.log(this.state.secondMovieID);
+            }
+          );
+        });
+    }
   };
 
-  firstMovieCreditsRequest = async () => {
-    const movieCredits = await fetch(
-      `https://api.themoviedb.org/3/movie/${this.state.firstMovieID}/credits?api_key=${API_KEY}&language=en-US`
-    ).then((response) => response.json());
-    this.setState(
-      {
-        firstMovieCrew: movieCredits,
-      },
-      () => {
-        console.log(this.state.firstMovieCrew.crew);
-      }
-    );
-  };
-
-  secondMovieRequest = async () => {
-    const movieData = await fetch(
-      "https://api.themoviedb.org/3/search/movie?api_key=" +
-        API_KEY +
-        "&language=en-US&query=" +
-        this.state.secondMovie +
-        "&page=1&include_adult=yes"
-    ).then((response) => response.json());
-    this.setState(
-      {
-        secondMovieData: movieData,
-        secondMovieID: movieData.results[0].id,
-      },
-      () => {
-        console.log(this.state.secondMovieData);
-        console.log(this.state.secondMovieID);
-      }
-    );
-    this.secondMovieCreditsRequest();
-  };
-
-  secondMovieCreditsRequest = async () => {
-    const movieCredits = await fetch(
-      `https://api.themoviedb.org/3/movie/${this.state.secondMovieID}/credits?api_key=${API_KEY}&language=en-US`
-    ).then((response) => response.json());
-    this.setState(
-      {
-        secondMovieCrew: movieCredits,
-      },
-      () => {
-        console.log(this.state.secondMovieCrew.crew);
-      }
-    );
-  };
+  // handleSubmission = (e) => {
+  //   e.preventDefault();
+  // const sendInputData = {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  //   body: JSON.stringify(this.state),
+  // };
+  //   fetch("/coinvalue", sendInputData);
+  //   fetch("/api/sum")
+  //     .then((res) => res.json())
+  //     .then((jsonData) => {
+  //       this.setState({
+  //         isLoaded: true,
+  //         changeReceived: jsonData,
+  //       });
+  //     });
+  // };
 
   render() {
     return (
