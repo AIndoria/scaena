@@ -21,3 +21,7 @@ To deploy locally, clone the project nagivate to the project directory, and run
 - Clean up the code
 
 - Add a Modal/Popup when a crew is clicked, which shows the Crewmember's Public Profile alongside a comparison of who they have collaborated with the most.
+
+### Attributions
+
+This project was created thanks to [TMDB](https://themoviedb.org/). All API calls are made through TMDB.
