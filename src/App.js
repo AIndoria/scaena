@@ -3,6 +3,9 @@ import logo from "./img/logo.svg";
 import React, { Component } from "react";
 
 const API_KEY = process.env.REACT_APP_MDB_API_KEY; //Absolutely not secure, consider doing it on a backend Express server for actual API keys that cost money. This one is rate limited and free so it doesn't matter.
+import ReactGA from "react-ga";
+const TRACKING_ID = "264660140";
+ReactGA.initialize(TRACKING_ID);
 
 class App extends Component {
   constructor(props) {
