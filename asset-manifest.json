@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/scaena/static/css/main.7077953f.chunk.css",
-    "main.js": "/scaena/static/js/main.f9bd2eda.chunk.js",
-    "main.js.map": "/scaena/static/js/main.f9bd2eda.chunk.js.map",
+    "main.js": "/scaena/static/js/main.2b6d1c2b.chunk.js",
+    "main.js.map": "/scaena/static/js/main.2b6d1c2b.chunk.js.map",
     "runtime-main.js": "/scaena/static/js/runtime-main.789b92cf.js",
     "runtime-main.js.map": "/scaena/static/js/runtime-main.789b92cf.js.map",
     "static/js/2.e6d70ce8.chunk.js": "/scaena/static/js/2.e6d70ce8.chunk.js",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.789b92cf.js",
     "static/js/2.e6d70ce8.chunk.js",
     "static/css/main.7077953f.chunk.css",
-    "static/js/main.f9bd2eda.chunk.js"
+    "static/js/main.2b6d1c2b.chunk.js"
   ]
 }
