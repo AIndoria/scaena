@@ -5,7 +5,7 @@ import ReactGA from "react-ga";
 
 const API_KEY = process.env.REACT_APP_MDB_API_KEY; //Absolutely not secure, consider doing it on a backend Express server for actual API keys that cost money. This one is rate limited and free so it doesn't matter.
 
-const TRACKING_ID = "G-C9451NGMHL";
+const TRACKING_ID = "UA-166030364-2";
 ReactGA.initialize(TRACKING_ID);
 
 class App extends Component {
